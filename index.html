@@ -1,207 +1,497 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Undika</title>
+    <meta name="author" content="Alvaro Trigo Lopez" />
+    <meta name="description" content="pagePiling.js plugin by Alvaro Trigo." />
+    <meta name="keywords"
+        content="pile,piling,piling.js,stack,pages,scrolling,stacking,touch,fullpile,scroll,plugin,jquery" />
+    <meta name="Resource-type" content="Document" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://alvarotrigo.com/pagePiling/jquery.pagepiling.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="https://alvarotrigo.com/pagePiling/examples/examples.css" /> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/taras-d/images-grid/src/images-grid.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/taras-d/images-grid/src/images-grid.min.js"></script>
+    <script type="text/javascript" src="https://alvarotrigo.com/pagePiling/jquery.pagepiling.min.js"></script>
+    <script type="text/javascript" src="https://alvarotrigo.com/pagePiling/examples/examples.js"></script>
+    <script type="text/javascript">
+        // var deleteLog = false;
+
+        $(document).ready(function () {
+            $('#pagepiling').pagepiling({
+                //menu: '#menu',
+                direction: 'vertical',
+                verticalCentered: true,
+                sectionsColor: [],
+                anchors: [],
+                scrollingSpeed: 1500,
+                easing: 'swing',
+                loopBottom: false,
+                loopTop: false,
+                css3: true,
+                navigation: {
+                    'textColor': '#000',
+                    'bulletsColor': '#000',
+                    'position': 'right',
+                    // 'tooltips': ['section1', 'section2', 'section3', 'section4']
+                },
+                normalScrollElements: null,
+                normalScrollElementTouchThreshold: 5,
+                touchSensitivity: 5,
+                keyboardScrolling: true,
+                sectionSelector: '.section',
+                animateAnchor: false,
+
+                //events
+                onLeave: function(index, nextIndex, direction){},
+                afterLoad: function(anchorLink, index){},
+                afterRender: function(){},
+            });
+        });
+    </script>
+
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat');
-    html, body {
-      overflow: hidden;
-    }
-    
-    .background {
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      overflow: hidden;
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-              backface-visibility: hidden;
-      height: 130vh;
-      position: fixed;
-      width: 100%;
-      transform: translateY(30vh);
-      transition: all 1.2s cubic-bezier(0.22, 0.44, 0, 1);
-    }
-    .background:before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-    .background:first-child {
-      background-image: url('https://i.postimg.cc/kXq9Qmnj/bgd1.jpg');
-      transform: translateY(-15vh);
-    }
-    .background:first-child .content-wrapper {
-      transform: translateY(15vh);
-    }
-    .background:nth-child(2) {
-      background-image: url('https://i.postimg.cc/W14vywqg/photo-1424746219973-8fe3bd07d8e3.jpg');
-    }
-    .background:nth-child(3) {
-      background-image: url('https://i.postimg.cc/TY0xQ41T/photo-1433840496881-cbd845929862.jpg');
-    }
-    
-    /* Set stacking context of slides */
-    .background:nth-child(1) {
-      z-index: 3;
-    }
-    
-    .background:nth-child(2) {
-      z-index: 2;
-    }
-    
-    .background:nth-child(3) {
-      z-index: 1;
-    }
-    
-    .content-wrapper {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      flex-flow: column nowrap;
-      color: #fff;
-      font-family: Montserrat;
-      text-transform: uppercase;
-      transform: translateY(40vh);
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-              backface-visibility: hidden;
-      transition: all 1.7s cubic-bezier(0.22, 0.44, 0, 1);
-    }
-    .content-title {
-      font-size: 12vh;
-      line-height: 1.4;
-    }
-    
-    .background.up-scroll {
-      transform: translate3d(0, -15vh, 0);
-    }
-    .background.up-scroll .content-wrapper {
-      transform: translateY(15vh);
-    }
-    .background.up-scroll + .background {
-      transform: translate3d(0, 30vh, 0);
-    }
-    .background.up-scroll + .background .content-wrapper {
-      transform: translateY(30vh);
-    }
-    
-    .background.down-scroll {
-      transform: translate3d(0, -130vh, 0);
-    }
-    .background.down-scroll .content-wrapper {
-      transform: translateY(40vh);
-    }
-    .background.down-scroll + .background:not(.down-scroll) {
-      transform: translate3d(0, -15vh, 0);
-    }
-    .background.down-scroll + .background:not(.down-scroll) .content-wrapper {
-      transform: translateY(15vh);
-    }
+        /* Style for our header texts
+	* --------------------------------------- */
+        h1 {
+            font-size: 5em;
+            font-family: arial, helvetica;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centered texts in each section
+	* --------------------------------------- */
+        .section {
+            text-align: center;
+        }
+
+
+        /* Backgrounds will cover all the section
+	* --------------------------------------- */
+        #section1,
+        #section2,
+        #section3,
+        #section4 {
+            background-size: cover;
+        }
+
+        /* Defining each section background and styles
+	* --------------------------------------- */
+        /* #section1 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg1.jpg);
+        }
+
+        #section2 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg2.jpg);
+            padding: 6% 0 0 0;
+        }
+
+        #section3 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg3.jpg);
+            padding: 6% 0 0 0;
+        } */
+
+        /* #section3 h1 {
+            color: #000;
+        }
+
+        #section1 h1 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 30px;
+            color: #fff;
+        }
+
+        #section2 .intro {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 30px;
+        }
+
+        #section2 h1,
+        #section2 p {
+            text-shadow: 1px 5px 20px #000;
+        }
+
+        #section3 h1,
+        #section3 p {
+            text-shadow: 1px 5px 20px #000;
+            color: #fff;
+        } */
+
+        #infoMenu li a {
+            color: #fff;
+        }
+
+        .abs-center-x {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .btn-circle { 
+            width: 40px; 
+            height: 40px; 
+            /* padding: 7px 10px;  */
+            border-radius: 25px; 
+            text-align: center; 
+        }
+        .circle-item { 
+            width: 40px;
+            height: 40px;
+            padding: 7px 8px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border-radius: 25px; 
+            text-align: center; 
+        }
+        .card {
+            background-color: #e9ecef80;
+        }
+        .floating-sidebar {
+            padding: 12px;
+            width: 4rem;
+            height: 32rem;
+            position: absolute;
+            left: 0.2rem;
+            top: 5rem;
+            background-color: #e9ecef4b;
+            z-index: 20;
+        }
+        .slider {
+            -webkit-appearance: none;  /* Override default CSS styles */
+            appearance: none;
+            width: 100%; /* Full-width */
+            height: 25px; /* Specified height */
+            background: #d3d3d3; /* Grey background */
+            outline: none; /* Remove outline */
+            opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+            -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+            transition: opacity .2s;
+        }
+
+        /* Mouse-over effects */
+        .slider:hover {
+            opacity: 1; /* Fully shown on mouse-over */
+        }
+
+        /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
     </style>
+
 </head>
+
 <body>
-    
-    <div class="container">
-        <section class="background">
-            <div class="content-wrapper">
-                <p class="content-title">Full Page Parallax Effect</p>
-                <p class="content-subtitle">Scroll down and up to see the effect!</p>
+    <!-- <ul id="menu">
+        <li data-menuanchor="page1" class="active"><a href="#page1">Page 1</a></li>
+        <li data-menuanchor="page2"><a href="#page2">Page 2</a></li>
+        <li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
+    </ul> -->
+    <header>
+
+        <!-- <nav class="hide">
+            <ul id="menu">
+                <li data-menuanchor="firstSection">
+                    <a href="#firstSection" title="First Section">First Section</a>
+                </li>
+                <li data-menuanchor="secondSection">
+                    <a href="#secondSection" title="Second Section">Second Section</a>
+                </li>
+                <li data-menuanchor="thirdSection">
+                    <a href="#thirdSection" title="Second Section">Third Section</a>
+                </li>
+                <li data-menuanchor="fourthSection">
+                    <a href="#fourthSection" title="Fourth Section">Fourth Section</a>
+                </li>
+                <li data-menuanchor="fifthSection">
+                    <a href="#fifthSection" title="First Slide">First Slide</a>
+                </li>
+                <li data-menuanchor="fifthSection/1">
+                    <a href="#fifthSection/1" title="Second Slide">Second Slide</a>
+                </li>
+            </ul>
+        </nav> -->
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <div class="col"></div>
+            <div class="col text-center">
+                <a class="navbar-brand" href="#"><img src="undika.png" height="35"></a>
             </div>
-        </section>
-        <section class="background">
-            <div class="content-wrapper">
-                <p class="content-title">Cras lacinia non eros nec semper.</p>
-                <p class="content-subtitle">Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                    himenaeos. Cras ut massa mattis nibh semper pretium.</p>
+            <div class="col d-flex justify-content-end">
+                <a class="nav-link" href="https://www.facebook.com/universitasdinamika/" target="_blank"><i class="fab fa-facebook-f text-white"></i></a>
+                <a class="nav-link" href="https://www.youtube.com/user/stikomsurabaya" target="_blank"><i class="fab fa-youtube text-white"></i></a>
+                <a class="nav-link" href="https://twitter.com/undikasurabaya" target="_blank"><i class="fab fa-twitter text-white"></i></a>
+                <a class="nav-link" href="https://www.instagram.com/universitasdinamika" target="_blank"><i class="fab fa-instagram text-white"></i></a>
             </div>
-        </section>
-        <section class="background">
-            <div class="content-wrapper">
-                <p class="content-title">Etiam consequat lectus.</p>
-                <p class="content-subtitle">Nullam tristique urna sed tellus ornare congue. Etiam vitae erat at nibh aliquam
-                    dapibus.</p>
+        </nav>
+        <nav class="navbar navbar-dark bg-dark fixed-bottom">
+            <div class="col d-flex justify-content-between align-items-center">
+                <button class="btn btn-danger btn-circle" id="play"><i class="fas fa-play"></i></button>
+                <input type="range" class="w-75 mx-4" id="volume" name="volume" min="0" max="10" value="10">
+                <button class="btn btn-danger btn-circle" id="mute"><i class="fas fa-volume-up"></i></button>
+                <img class="mx-4" src="dradio.png" height="32">
             </div>
-        </section>
+            <div class="col">
+            </div>
+        </nav>
+        <div class="floating-sidebar justify-content-center">
+            <div class="circle-item bg-white">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-podcast"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div class="circle-item bg-white">
+                <i class="fas fa-book"></i>
+            </div>
+        </div>
+    </header>
+    <div id="pagepiling">
+        <div class="section" id="section1" style="background-image: url('home.png');">
+            <!-- <div class="container">
+                <div class="jumbotron" style="background-color: #e9ecef80;">
+                    <h1 class="display-4">Hello, world!</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>
+            </div> -->
+        </div>
+        <div class="section" id="section2" style="background-image: url('prestasi.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <h2 class="text-white font-weight-bold text-left" style="font-size: 2.5rem">P R E S T A S I <br>& I N O V A S I</h2>
+                        <hr class="w-50 ml-0" style="border-top: 8px solid #BA1C2C;">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h5 class="text-white">31 Oktober 2020</h5>
+                                <div class="card">
+                                    <img class="card-img-top" style="object-fit: cover; height: 150px;" src="https://picsum.photos/800/480" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">COOLTURE.ID</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-white">31 Oktober 2020</h5>
+                                <div class="card">
+                                    <img class="card-img-top" style="object-fit: cover; height: 150px;" src="https://picsum.photos/800/480" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">COOLTURE.ID</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mt-lg-0 mt-5">
+                        <div class="card">
+                            <img class="card-img-top" style="object-fit: cover; height: 240px;" src="https://random.imagecdn.app/800/480" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">COOLTURE.ID</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section3" style="background-image: url('news.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <h5 class="text-white">31 Oktober 2020</h5>
+                        <div class="card">
+                            <img class="card-img-top" style="object-fit: cover; height: 240px;" src="https://picsum.photos/800/480" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">COOLTURE.ID</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 mt-lg-0 mt-5">
+                        <h2 class="text-white font-weight-bold" style="font-size: 2.5rem">N E W S</h2>
+                        <hr class="text-center w-50" style="border-top: 8px solid #BA1C2C;">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h5 class="text-white">31 Oktober 2020</h5>
+                                <div class="card">
+                                    <img class="card-img-top" style="object-fit: cover; height: 150px;" src="https://random.imagecdn.app/800/480" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">COOLTURE.ID</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-white">31 Oktober 2020</h5>
+                                <div class="card">
+                                    <img class="card-img-top" style="object-fit: cover; height: 150px;" src="https://random.imagecdn.app/800/480" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">COOLTURE.ID</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section4" style="background-image: url('gallery.png');">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="text-white font-weight-bold" style="font-size: 2.5rem">G A L L E R Y</h2>
+                        <hr class="text-center w-25" style="border-top: 8px solid #BA1C2C;">
+                        <div class="row mt-4">
+                            <div class="col">
+                                <div class="card">
+                                    <!-- <img class="card-img-top" style="object-fit: cover; height: 150px;" src="https://picsum.photos/800/480" alt="Card image cap"> -->
+                                    <!-- <div class="grid">
+                                        <div class="grid-item"><img src="https://picsum.photos/800/480" alt="Card image cap"></div>
+                                        <div class="grid-item grid-item--width2"><img src="https://picsum.photos/id/237/800/480" alt="Card image cap"></div>
+                                        <div class="grid-item"><img src="https://picsum.photos/800/480" alt="Card image cap"></div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://random.imagecdn.app/800/480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://random.imagecdn.app/800/480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://random.imagecdn.app/800/480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://random.imagecdn.app/800/480" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://source.unsplash.com/random/800x480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://source.unsplash.com/random/800x480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://source.unsplash.com/random/800x480" />
+                                        </div>
+                                        <div class="col-lg-3 col-6 p-0">
+                                            <img class="w-100 p-0" src="https://source.unsplash.com/random/800x480" />
+                                        </div>
+                                    </div>
+                                    <!-- <div id="lightgallery">
+                                        <a href="https://picsum.photos/800/480">
+                                            <img class="img-thumbnail" src="https://picsum.photos/800/480" />
+                                        </a>
+                                        <a href="https://picsum.photos/id/237/800/480">
+                                            <img class="img-thumbnail" src="https://picsum.photos/id/237/800/480" />
+                                        </a>
+                                    </div> -->
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js" integrity="sha512-2iwCHjuj+PmdCyvb88rMOch0UcKQxVHi/gsAml1fN3eg82IDaO/cdzzeXX4iF2VzIIes7pODE1/G0ts3QBwslA==" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
     <script>
-        // ------------- VARIABLES ------------- //
-    var ticking = false;
-    var isFirefox = (/Firefox/i.test(navigator.userAgent));
-    var isIe = (/MSIE/i.test(navigator.userAgent)) || (/Trident.*rv\:11\./i.test(navigator.userAgent));
-    var scrollSensitivitySetting = 30; //Increase/decrease this number to change sensitivity to trackpad gestures (up = less sensitive; down = more sensitive) 
-    var slideDurationSetting = 600; //Amount of time for which slide is "locked"
-    var currentSlideNumber = 0;
-    var totalSlideNumber = $(".background").length;
-
-    // ------------- DETERMINE DELTA/SCROLL DIRECTION ------------- //
-    function parallaxScroll(evt) {
-    if (isFirefox) {
-        //Set delta for Firefox
-        delta = evt.detail * (-120);
-    } else if (isIe) {
-        //Set delta for IE
-        delta = -evt.deltaY;
-    } else {
-        //Set delta for all other browsers
-        delta = evt.wheelDelta;
-    }
-
-    if (ticking != true) {
-        if (delta <= -scrollSensitivitySetting) {
-        //Down scroll
-        ticking = true;
-        if (currentSlideNumber !== totalSlideNumber - 1) {
-            currentSlideNumber++;
-            nextItem();
+        // lightGallery(document.getElementById('lightgallery'));
+        var playState = false;
+        var muteState = false;
+        // var sound = null;
+        const sound = new Howl({
+            src: ['https://a1.siar.us/radio/8420/radio.mp3'],
+            html5: true,
+            format: ['mp3'],
+        });
+        $('#play').click(function(e){
+            /* if(sound == null){
+                sound = new Howl({
+                    src: ['https://a1.siar.us/radio/8420/radio.mp3'],
+                    html5: true,
+                    format: ['mp3'],
+                });
+            } */
+            togglePlay();
+            setButton($(this));
+            /* if(!playState){
+                $(this).children().removeClass('fa-play').addClass('fa-pause');
+            }else{
+                $(this).children().removeClass('fa-pause').addClass('fa-play');
+            } */
+            
+        })
+        $('#mute').click(function(e){
+            if(!muteState){
+                $(this).children().removeClass('fa-volume-up').addClass('fa-volume-mute');
+            }else{
+                $(this).children().removeClass('fa-volume-mute').addClass('fa-volume-up');
+            }
+            sound.mute(!muteState);
+            muteState = !muteState;
+        })
+        $('#volume').on('input', function(e){
+            var vol = $(this).val();
+            sound.volume(vol/10);
+        })
+        function togglePlay(){
+            return sound.playing() ? sound.pause() : sound.play();
         }
-        slideDurationTimeout(slideDurationSetting);
+        function setButton(state){
+            if(!playState){
+                state.children().removeClass('fa-play').addClass('fa-pause');
+            }else{
+                state.children().removeClass('fa-pause').addClass('fa-play');
+            }
+            playState = !playState;
         }
-        if (delta >= scrollSensitivitySetting) {
-        //Up scroll
-        ticking = true;
-        if (currentSlideNumber !== 0) {
-            currentSlideNumber--;
-        }
-        previousItem();
-        slideDurationTimeout(slideDurationSetting);
-        }
-    }
-    }
-
-    // ------------- SET TIMEOUT TO TEMPORARILY "LOCK" SLIDES ------------- //
-    function slideDurationTimeout(slideDuration) {
-    setTimeout(function() {
-        ticking = false;
-    }, slideDuration);
-    }
-
-    // ------------- ADD EVENT LISTENER ------------- //
-    var mousewheelEvent = isFirefox ? "DOMMouseScroll" : "wheel";
-    window.addEventListener(mousewheelEvent, _.throttle(parallaxScroll, 60), false);
-
-    // ------------- SLIDE MOTION ------------- //
-    function nextItem() {
-    var $previousSlide = $(".background").eq(currentSlideNumber - 1);
-    $previousSlide.removeClass("up-scroll").addClass("down-scroll");
-    }
-
-    function previousItem() {
-    var $currentSlide = $(".background").eq(currentSlideNumber);
-    $currentSlide.removeClass("down-scroll").addClass("up-scroll");
-    }
     </script>
 </body>
+
 </html>

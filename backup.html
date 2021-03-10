@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pagePiling.js plugin - Backgrounds</title>
+    <meta name="author" content="Alvaro Trigo Lopez" />
+    <meta name="description" content="pagePiling.js plugin by Alvaro Trigo." />
+    <meta name="keywords"
+        content="pile,piling,piling.js,stack,pages,scrolling,stacking,touch,fullpile,scroll,plugin,jquery" />
+    <meta name="Resource-type" content="Document" />
+
+    <link rel="stylesheet" type="text/css" href="https://alvarotrigo.com/pagePiling/jquery.pagepiling.css" />
+    <link rel="stylesheet" type="text/css" href="https://alvarotrigo.com/pagePiling/examples/examples.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://alvarotrigo.com/pagePiling/jquery.pagepiling.min.js"></script>
+    <script type="text/javascript" src="https://alvarotrigo.com/pagePiling/examples/examples.js"></script>
+    <script type="text/javascript">
+        // var deleteLog = false;
+
+        $(document).ready(function () {
+            $('#pagepiling').pagepiling({
+                //menu: '#menu',
+                direction: 'vertical',
+                verticalCentered: true,
+                sectionsColor: [],
+                anchors: [],
+                scrollingSpeed: 1000,
+                easing: 'swing',
+                loopBottom: false,
+                loopTop: false,
+                css3: true,
+                navigation: {
+                    'textColor': '#000',
+                    'bulletsColor': '#000',
+                    'position': 'right',
+                    'tooltips': ['section1', 'section2', 'section3', 'section4']
+                },
+                normalScrollElements: null,
+                normalScrollElementTouchThreshold: 5,
+                touchSensitivity: 5,
+                keyboardScrolling: true,
+                sectionSelector: '.section',
+                animateAnchor: false,
+
+                //events
+                onLeave: function(index, nextIndex, direction){},
+                afterLoad: function(anchorLink, index){},
+                afterRender: function(){},
+            });
+        });
+    </script>
+
+    <style>
+        /* Style for our header texts
+	* --------------------------------------- */
+        h1 {
+            font-size: 5em;
+            font-family: arial, helvetica;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centered texts in each section
+	* --------------------------------------- */
+        .section {
+            text-align: center;
+        }
+
+
+        /* Backgrounds will cover all the section
+	* --------------------------------------- */
+        #section1,
+        #section2,
+        #section3 {
+            background-size: cover;
+        }
+
+        /* Defining each section background and styles
+	* --------------------------------------- */
+        /* #section1 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg1.jpg);
+        }
+
+        #section2 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg2.jpg);
+            padding: 6% 0 0 0;
+        }
+
+        #section3 {
+            background-image: url(https://raw.githubusercontent.com/alvarotrigo/pagePiling.js/master/examples/imgs/bg3.jpg);
+            padding: 6% 0 0 0;
+        } */
+
+        #section3 h1 {
+            color: #000;
+        }
+
+        #section1 h1 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 30px;
+            color: #fff;
+        }
+
+        #section2 .intro {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 30px;
+        }
+
+        #section2 h1,
+        #section2 p {
+            text-shadow: 1px 5px 20px #000;
+        }
+
+        #section3 h1,
+        #section3 p {
+            text-shadow: 1px 5px 20px #000;
+            color: #fff;
+        }
+
+        #infoMenu li a {
+            color: #fff;
+        }
+
+        .abs-center-x {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <ul id="menu">
+        <li data-menuanchor="page1" class="active"><a href="#page1">Page 1</a></li>
+        <li data-menuanchor="page2"><a href="#page2">Page 2</a></li>
+        <li data-menuanchor="page3"><a href="#page3">Page 3</a></li>
+    </ul> -->
+    <header>
+
+        <!-- <nav class="hide">
+            <ul id="menu">
+                <li data-menuanchor="firstSection">
+                    <a href="#firstSection" title="First Section">First Section</a>
+                </li>
+                <li data-menuanchor="secondSection">
+                    <a href="#secondSection" title="Second Section">Second Section</a>
+                </li>
+                <li data-menuanchor="thirdSection">
+                    <a href="#thirdSection" title="Second Section">Third Section</a>
+                </li>
+                <li data-menuanchor="fourthSection">
+                    <a href="#fourthSection" title="Fourth Section">Fourth Section</a>
+                </li>
+                <li data-menuanchor="fifthSection">
+                    <a href="#fifthSection" title="First Slide">First Slide</a>
+                </li>
+                <li data-menuanchor="fifthSection/1">
+                    <a href="#fifthSection/1" title="Second Slide">Second Slide</a>
+                </li>
+            </ul>
+        </nav> -->
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                <!-- <ul class="navbar-nav mr-auto ml-auto">
+                    <li class="nav-item active">
+                        
+                    </li>
+                </ul> -->
+                <div class="navbar-nav mx-auto">
+                    <!-- <a class="navbar-brand mx-auto" href="#">Navbar 2</a> -->
+                    <a class="navbar-brand" href="#"><img src="https://www.dinamika.ac.id/assets/images/stikom_footer.png" height="35"></a>
+                    
+                </div>
+                <!-- <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"> -->
+                <div class="ml-auto flex-grow-0">
+                    <!-- <ul class="navbar-nav text-right"> -->
+                        <!-- <li class="nav-item"> -->
+                            <a class="nav-link" href="#">Right</a>
+                        <!-- </li> -->
+                        <!-- <li class="nav-item"> -->
+                            <a class="nav-link" href="#">Link</a>
+                        <!-- </li> -->
+                    <!-- </ul> -->
+                </div>
+            <!-- </div> -->
+        </nav>
+        <nav class="navbar navbar-dark bg-dark fixed-bottom">
+            <div class="col">text</div>
+            <div class="col">text</div>
+        </nav>
+    </header>
+    <div id="pagepiling">
+        <div class="section" id="section1">
+            <div class="container-fluid w-100 h-100 p-5" style="background-image: url('home.png'); background-size: cover;">
+                <div class="jumbotron">
+                    <h1 class="display-4">Hello, world!</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p class="lead">
+                      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2" style="background-image: url('news.png');">
+            <div class="intro">
+                <h1>Backgrounds </h1>
+                <p>Show it in full screen!</p>
+            </div>
+        </div>
+        <div class="section" id="section3" style="background-image: url('prestasi.png');">
+            <div class="intro">
+                <h1>Just terrific!</h1>
+                <p>Use the power of images</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
